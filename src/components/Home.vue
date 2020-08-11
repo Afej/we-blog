@@ -6,8 +6,8 @@
           <carousel
             :per-page="1"
             :mouse-drag="true"
-            :paginationEnabled="false"
-            :navigationEnabled="true"
+            :paginationEnabled="true"
+            :navigationEnabled="false"
             :autoplay="true"
             :loop="true"
           >
@@ -35,13 +35,8 @@
           </carousel>
         </div>
       </div>
-      <!-- <div class="row">
-        <BlogEntry :category="slides[0].category" :title="featured[0].title" />
-        <BlogEntry :category="slides[1].category" :title="featured[1].title" />
-        <BlogEntry :category="slides[2].category" :title="featured[2].title" />
-        <BlogEntry :category="slides[1].category" :title="featured[3].title" />
-        <BlogEntry :category="slides[0].category" :title="featured[4].title" />
-      </div>-->
+
+      <Category />
     </div>
   </section>
 </template>
@@ -51,7 +46,7 @@
 <script>
 import { Carousel, Slide } from "vue-carousel";
 
-// import BlogEntry from "./BlogPosts/blogEntry";
+import Category from "./BlogPosts/category";
 
 import slideBck from "../assets/images/img_1.jpg";
 import slideBck2 from "../assets/images/img_2.jpg";
@@ -83,7 +78,7 @@ export default {
   components: {
     Carousel,
     Slide,
-    // BlogEntry,
+    Category,
   },
   methods: {
     getPosts() {

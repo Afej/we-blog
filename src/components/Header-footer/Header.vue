@@ -4,7 +4,9 @@
       <div class="container">
         <div class="row">
           <div class="col-9 social">
-            <img src="../../assets/images/logo.png" alt="logo" class="logo" />
+            <router-link to="/">
+              <img src="../../assets/images/logo.png" alt="logo" class="logo" />
+            </router-link>
           </div>
           <div class="col-3 search-top">
             <form action="#" class="search-top-form">
