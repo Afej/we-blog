@@ -11,20 +11,12 @@
 <script>
 import Header from "./components/Header-footer/Header";
 import Footer from "./components/Header-footer/Footer";
-// import Home from "./components/Home/index";
-// import BlogPosts from "./components/BlogPosts/index";
-// import BlogEntry from "./components/BlogPosts/blogEntry";
-// import SinglePost from "./components/BlogPosts/singlePost";
 
 export default {
   name: "App",
   components: {
     Header,
     Footer,
-    // Home,
-    // BlogPosts,
-    // BlogEntry,
-    // SinglePost,
   },
 };
 </script>

@@ -1,22 +1,22 @@
 export const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: () => import('./components/Home/index'),
+    name: 'home',
+    component: () => import('./components/Home'),
   },
   {
     path: '/about',
-    name: 'About',
+    name: 'about',
     component: () => import('./components/About'),
   },
   {
-    path: '/blogpost',
-    name: 'BlogPost',
+    path: '/blogpost/:id',
+    name: 'blogpost',
     component: () => import('./components/BlogPosts/singlePost'),
   },
   {
     path: '/category',
-    name: 'Category',
+    name: 'category',
     component: () => import('./components/BlogPosts/category'),
   },
 ];

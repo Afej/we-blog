@@ -2,65 +2,50 @@
   <section class="site-section py-lg">
     <div class="container">
       <div class="row blog-entries">
-        <div class="col-md-12 col-lg-8 main-content">
-          <h1 class="mb-4">There’s a Cool New Way for Men to Wear Socks and Sandals</h1>
+        <div class="col-md-12 col-lg-10 offset-lg-1 main-content">
+          <h1 class="mb-4">{{post.title}}</h1>
           <div class="post-meta">
             <span class="category">Food</span>
             <span class="mr-2">March 15, 2018</span> &bullet;
             <span class="ml-2">
-              <span class="fa fa-comments"></span> 3
+              <span class="fa fa-comments"></span>
+              {{comments.length}}
             </span>
           </div>
           <div class="post-content-body">
             <div class="row mb-5">
-              <div class="col-md-12 mb-4 element-animate">
-                <img src="images/img_7.jpg" alt="Image placeholder" class="img-fluid" />
+              <div class="col-md-12 mb-4">
+                <img src="../../assets/images/img_7.jpg" alt="Image placeholder" class="img-fluid" />
               </div>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium nam quas inventore, ut iure iste modi eos adipisci ad ea itaque labore earum autem nobis et numquam, minima eius. Nam eius, non unde ut aut sunt eveniet rerum repellendus porro.</p>
-            <p>Sint ab voluptates itaque, ipsum porro qui obcaecati cumque quas sit vel. Voluptatum provident id quis quo. Eveniet maiores perferendis officia veniam est laborum, expedita fuga doloribus natus repellendus dolorem ab similique sint eius cupiditate necessitatibus, magni nesciunt ex eos.</p>
-            <p>Quibusdam autem, quas molestias recusandae aperiam molestiae modi qui ipsam vel. Placeat tenetur veritatis tempore quos impedit dicta, error autem, quae sint inventore ipsa quidem. Quo voluptate quisquam reiciendis, minus, animi minima eum officia doloremque repellat eos, odio doloribus cum.</p>
-            <p>Temporibus quo dolore veritatis doloribus delectus dolores perspiciatis recusandae ducimus, nisi quod, incidunt ut quaerat, magnam cupiditate. Aut, laboriosam magnam, nobis dolore fugiat impedit necessitatibus nisi cupiditate, quas repellat itaque molestias sit libero voluptas eveniet omnis illo ullam dolorem minima.</p>
+            <p>{{post.body}}</p>
+            <p>{{post.body}}</p>
+            <p>{{post.body}}</p>
+            <p>{{post.body}}</p>
           </div>
 
           <div class="pt-5">
             <p>
               Categories:
               <a href="#">Food</a>,
-              <a href="#">Travel</a> Tags:
-              <a href="#">#manila</a>,
-              <a href="#">#asia</a>
+              <a href="#">Travel</a>
             </p>
           </div>
 
           <div class="pt-5">
-            <h3 class="mb-5">6 Comments</h3>
-            <ul class="comment-list">
+            <h3 class="mb-5">{{comments.length}} Comments</h3>
+            <ul class="comment-list" v-for="(comment,index) in comments" :key="index">
               <li class="comment">
                 <div class="vcard">
-                  <img src="images/person_1.jpg" alt="Image placeholder" />
+                  <img src="../../assets/images/person_1.jpg" alt="Image placeholder" />
                 </div>
                 <div class="comment-body">
-                  <h3>Jean Doe</h3>
-                  <div class="meta">January 9, 2018 at 2:21pm</div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                  <p>
+                  <h3 class="text-capitalize">{{comment.name}}</h3>
+                  <div class="text-lowercase">{{comment.email}}</div>
+                  <p>{{comment.body}}</p>
+                  <!-- <p>
                     <a href="#" class="reply">Reply</a>
-                  </p>
-                </div>
-              </li>
-
-              <li class="comment">
-                <div class="vcard">
-                  <img src="images/person_1.jpg" alt="Image placeholder" />
-                </div>
-                <div class="comment-body">
-                  <h3>Jean Doe</h3>
-                  <div class="meta">January 9, 2018 at 2:21pm</div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                  <p>
-                    <a href="#" class="reply">Reply</a>
-                  </p>
+                  </p>-->
                 </div>
               </li>
             </ul>
@@ -68,18 +53,25 @@
 
             <div class="comment-form-wrap pt-5">
               <h3 class="mb-5">Leave a comment</h3>
-              <form action="#" class="p-5 bg-light">
+              <form @submit.prevent="postComment" class="p-5 bg-light">
                 <div class="form-group">
                   <label for="name">Name *</label>
-                  <input type="text" class="form-control" id="name" />
+                  <input type="text" class="form-control" id="name" v-model="comment.name" />
                 </div>
                 <div class="form-group">
                   <label for="email">Email *</label>
-                  <input type="email" class="form-control" id="email" />
+                  <input type="email" class="form-control" id="email" v-model="comment.email" />
                 </div>
                 <div class="form-group">
                   <label for="message">Message</label>
-                  <textarea name id="message" cols="30" rows="10" class="form-control"></textarea>
+                  <textarea
+                    name
+                    id="message"
+                    cols="30"
+                    rows="10"
+                    class="form-control"
+                    v-model="comment.body"
+                  ></textarea>
                 </div>
                 <div class="form-group">
                   <input type="submit" value="Post Comment" class="btn btn-primary" />
@@ -94,3 +86,48 @@
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      id: this.$route.params.id,
+      post: {},
+      comments: [],
+      comment: {
+        name: "",
+        email: "",
+        body: "",
+      },
+    };
+  },
+  methods: {
+    getPost(id) {
+      this.$http
+        .get(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        .then((response) => response.json())
+        .then((data) => (this.post = data));
+    },
+    getComments(id) {
+      this.$http
+        .get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
+        .then((response) => response.json())
+        .then((data) => (this.comments = data));
+    },
+    postComment() {
+      if (this.comment.name && this.comment.email && this.comment.body) {
+        this.comments.push(this.comment);
+        this.comment = {
+          name: "",
+          email: "",
+          body: "",
+        };
+      }
+    },
+  },
+  created() {
+    this.getPost(this.id);
+    this.getComments(this.id);
+  },
+};
+</script>

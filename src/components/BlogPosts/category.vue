@@ -3,104 +3,42 @@
     <div class="container">
       <div class="row mb-4">
         <div class="col-md-6">
-          <h2 class="mb-4">Category: Food</h2>
+          <h2 class="mb-4">Trending</h2>
         </div>
       </div>
       <div class="row blog-entries">
         <div class="col-md-12 col-lg-12 main-content">
           <div class="row mb-5 mt-5">
-            <div class="col-md-12">
-              <div class="post-entry-horzontal">
-                <a href="#">
-                  <div
-                    class="image element-animate"
-                    data-animate-effect="fadeIn"
-                    style="background-image: url(images/img_10.jpg);"
-                  ></div>
-                  <span class="text">
-                    <div class="post-meta">
-                      <span class="category">Travel</span>
-                      <span class="mr-2">March 15, 2018</span> &bullet;
-                      <span class="ml-2">
-                        <span class="fa fa-comments"></span> 3
-                      </span>
-                    </div>
-                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                  </span>
-                </a>
+            <paginate name="blogposts" :list="blogposts" :per="10">
+              <div class="col-md-12" v-for="(post,index) in paginated('blogposts')" :key="index">
+                <div class="post-entry-horzontal">
+                  <router-link :to="{name: 'blogpost', params: {id: post.id}}">
+                    <div
+                      class="image"
+                      :style="{'background-image': `url(${require('../../assets/images/img_10.jpg')})`}"
+                    ></div>
+                    <span class="text">
+                      <div class="post-meta">
+                        <span class="category">Travel</span>
+                        <span class="mr-2">March 15, 2018</span> &bullet;
+                        <span class="ml-2">
+                          <span class="fa fa-comments"></span>
+                        </span>
+                      </div>
+                      <h2>{{post.title}}</h2>
+                    </span>
+                  </router-link>
+                </div>
+                <!-- END post -->
               </div>
-              <!-- END post -->
-
-              <div class="post-entry-horzontal">
-                <a href="#">
-                  <div
-                    class="image element-animate"
-                    data-animate-effect="fadeIn"
-                    style="background-image: url(images/img_11.jpg);"
-                  ></div>
-                  <span class="text">
-                    <div class="post-meta">
-                      <span class="category">Lifestyle</span>
-                      <span class="mr-2">March 15, 2018</span> &bullet;
-                      <span class="ml-2">
-                        <span class="fa fa-comments"></span> 3
-                      </span>
-                    </div>
-                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                  </span>
-                </a>
-              </div>
-              <!-- END post -->
-
-              <div class="post-entry-horzontal">
-                <a href="#">
-                  <div
-                    class="image element-animate"
-                    data-animate-effect="fadeIn"
-                    style="background-image: url(images/img_12.jpg);"
-                  ></div>
-                  <span class="text">
-                    <div class="post-meta">
-                      <span class="category">Food</span>
-                      <span class="mr-2">March 15, 2018</span> &bullet;
-                      <span class="ml-2">
-                        <span class="fa fa-comments"></span> 3
-                      </span>
-                    </div>
-                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                  </span>
-                </a>
-              </div>
-              <!-- END post -->
-
-              <div class="post-entry-horzontal">
-                <a href="#">
-                  <div
-                    class="image element-animate"
-                    data-animate-effect="fadeIn"
-                    style="background-image: url(images/img_9.jpg);"
-                  ></div>
-                  <span class="text">
-                    <div class="post-meta">
-                      <span class="category">Travel</span>
-                      <span class="mr-2">March 15, 2018</span> &bullet;
-                      <span class="ml-2">
-                        <span class="fa fa-comments"></span> 3
-                      </span>
-                    </div>
-                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                  </span>
-                </a>
-              </div>
-              <!-- END post -->
-            </div>
+            </paginate>
           </div>
 
           <div class="row">
             <div class="col-md-12 text-center">
               <nav aria-label="Page navigation" class="text-center">
                 <ul class="pagination">
-                  <li class="page-item active">
+                  <!-- <li class="page-item active">
                     <a class="page-link" href="#">Prev</a>
                   </li>
                   <li class="page-item">
@@ -114,6 +52,14 @@
                   </li>
                   <li class="page-item">
                     <a class="page-link" href="#">Next</a>
+                  </li>-->
+                  <li class="page-item">
+                    <paginate-links
+                      for="blogposts"
+                      :async="true"
+                      :show-step-links="true"
+                      class="page-links"
+                    ></paginate-links>
                   </li>
                 </ul>
               </nav>
@@ -126,3 +72,26 @@
     </div>
   </section>
 </template>
+
+
+<script>
+export default {
+  data() {
+    return {
+      blogposts: [],
+      paginate: ["blogposts"],
+    };
+  },
+  methods: {
+    getPosts() {
+      this.$http
+        .get("https://jsonplaceholder.typicode.com/posts/?_limit=60")
+        .then((response) => response.json())
+        .then((data) => (this.blogposts = data));
+    },
+  },
+  created() {
+    this.getPosts();
+  },
+};
+</script>

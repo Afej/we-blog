@@ -13,8 +13,8 @@
           >
             <slide v-for="(slide,index) in slides" :key="index">
               <div>
-                <a
-                  href="/blogpost"
+                <router-link
+                  :to="{name: 'blogpost', params: {id: slide.id}}"
                   class="a-block d-flex align-items-center height-lg"
                   :style="{'background-image':`url(${slide.bck})`}"
                 >
@@ -26,23 +26,22 @@
                         <span class="fa fa-comments"></span> 3
                       </span>
                     </div>
-                    <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Quidem nobis, ut dicta eaque ipsa laudantium!
-                    </p>
+                    <h3>{{featured[0].title}}</h3>
+                    <p>{{featured[0].body}}</p>
                   </div>
-                </a>
+                </router-link>
               </div>
             </slide>
           </carousel>
         </div>
       </div>
-      <div class="row">
-        <BlogEntry :category="slides[0].category" />
-        <BlogEntry :category="slides[1].category" />
-        <BlogEntry :category="slides[2].category" />
-      </div>
+      <!-- <div class="row">
+        <BlogEntry :category="slides[0].category" :title="featured[0].title" />
+        <BlogEntry :category="slides[1].category" :title="featured[1].title" />
+        <BlogEntry :category="slides[2].category" :title="featured[2].title" />
+        <BlogEntry :category="slides[1].category" :title="featured[3].title" />
+        <BlogEntry :category="slides[0].category" :title="featured[4].title" />
+      </div>-->
     </div>
   </section>
 </template>
@@ -52,25 +51,29 @@
 <script>
 import { Carousel, Slide } from "vue-carousel";
 
-import BlogEntry from "../BlogPosts/blogEntry";
+// import BlogEntry from "./BlogPosts/blogEntry";
 
-import slideBck from "../../assets/images/img_1.jpg";
-import slideBck2 from "../../assets/images/img_2.jpg";
-import slideBck3 from "../../assets//images/img_3.jpg";
+import slideBck from "../assets/images/img_1.jpg";
+import slideBck2 from "../assets/images/img_2.jpg";
+import slideBck3 from "../assets/images/img_3.jpg";
 
 export default {
   data() {
     return {
+      featured: [],
       slides: [
         {
+          id: 1,
           bck: slideBck,
           category: "Lifestyle",
         },
         {
+          id: 2,
           bck: slideBck2,
           category: "Food",
         },
         {
+          id: 3,
           bck: slideBck3,
           category: "Travel",
         },
@@ -80,14 +83,14 @@ export default {
   components: {
     Carousel,
     Slide,
-    BlogEntry,
+    // BlogEntry,
   },
   methods: {
     getPosts() {
       this.$http
-        .get("https://jsonplaceholder.typicode.com/posts/?_limit=10")
+        .get("https://jsonplaceholder.typicode.com/posts/?_limit=5")
         .then((response) => response.json())
-        .then((json) => console.log(json));
+        .then((data) => (this.featured = data));
     },
   },
   created() {

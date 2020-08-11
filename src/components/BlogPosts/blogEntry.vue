@@ -1,7 +1,7 @@
 <template>
   <div class="col-md-6 col-lg-4">
-    <a
-      href="/blogpost"
+    <router-link
+      to="/blogpost"
       class="a-block d-flex align-items-center height-md"
       :style="{'background-image':`url(${img})`}"
     >
@@ -13,9 +13,9 @@
             <span class="fa fa-comments"></span> 3
           </span>
         </div>
-        <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
+        <h3>{{title}}</h3>
       </div>
-    </a>
+    </router-link>
   </div>
 </template>
 
@@ -28,6 +28,6 @@ export default {
       img,
     };
   },
-  props: ["category"],
+  props: ["category", "title"],
 };
 </script>

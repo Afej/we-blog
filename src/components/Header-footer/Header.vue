@@ -4,18 +4,7 @@
       <div class="container">
         <div class="row">
           <div class="col-9 social">
-            <a href="#">
-              <span class="fa fa-twitter"></span>
-            </a>
-            <a href="#">
-              <span class="fa fa-facebook"></span>
-            </a>
-            <a href="#">
-              <span class="fa fa-instagram"></span>
-            </a>
-            <a href="#">
-              <span class="fa fa-youtube-play"></span>
-            </a>
+            <img src="../../assets/images/logo.png" alt="logo" class="logo" />
           </div>
           <div class="col-3 search-top">
             <form action="#" class="search-top-form">
@@ -49,7 +38,7 @@
         <div class="collapse navbar-collapse" id="navbarMenu">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-              <router-link class="nav-link active" to="/">Home</router-link>
+              <router-link class="nav-link" to="/" active-class="active" exact>Home</router-link>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -59,7 +48,7 @@
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-              >Categories</a>
+              >Trending</a>
               <div class="dropdown-menu" aria-labelledby="dropdown05">
                 <router-link class="dropdown-item" to="/category">Lifestyle</router-link>
                 <router-link class="dropdown-item" to="/category">Food</router-link>
@@ -69,7 +58,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/about">About</router-link>
+              <router-link class="nav-link" to="/about" active-class="active" exact>About</router-link>
             </li>
           </ul>
         </div>
@@ -77,5 +66,12 @@
     </nav>
   </header>
 </template>
+
+<style scoped>
+.logo {
+  width: 50px;
+  height: 50px;
+}
+</style>
 
 
